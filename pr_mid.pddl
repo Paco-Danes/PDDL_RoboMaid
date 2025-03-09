@@ -6,7 +6,7 @@
   ;;------------------------------------------------------------
   (:objects
     r1 - robot
-    room1 room2 room3 room4 room5 room6 room7 - room
+    room1 room2 room3 room4 room5 room6 - room
     k1 k2 - key
   )
 
@@ -28,27 +28,10 @@
     (connected room5 room4)
     (connected room5 room6)
     (connected room6 room5)
-    (connected room5 room7)
-    (connected room7 room5)
-    
-    ;; Locked doors
-    (locked room4 room5)
-    (locked room5 room4)
-    (locked room5 room7)
-    (locked room7 room5)
-    
-    ;; Two keys
-    (key-in k1 room6)
-    (opens k1 room5 room7)
-    (opens k1 room7 room5)
-    
-    (key-in k2 room7)
-    (opens k2 room4 room5)
-    (opens k2 room5 room4)
 
     ;; Trash bins in rooms 3 and 4
-    (trash-bin room7)
     (trash-bin room4)
+    (trash-bin room2)  
 
     ;; One dirty room
     (dirty room4)

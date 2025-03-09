@@ -1,0 +1,4 @@
+sudo systemctl start docker
+sudo docker run  -v /home/indigolog/Desktop/PDDL_domains_and_problems/PR:/computer -it --privileged --rm docker.io/library/myplauntils bash
+planutils activate
+downward /computer/domain.pddl /computer/pr_hard.pddl --search "astar(ff())" add() blind() hmax()
