@@ -57,6 +57,9 @@
     ;; Rooms with trash
     (trash-in room5)
     (trash-in room6)
+    
+    (charging-station room2)  ;; Room 2 has a charger
+    (charged-5 r1)  ;; Start with 5 charge
   )
 
   ;;------------------------------------------------------------
