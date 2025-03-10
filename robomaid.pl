@@ -43,6 +43,7 @@ initially(dirty(room5), true).
 
 initially(trash_at(room6), true).
 initially(trash_bin_at(room4), true).
+initially(has_trash(robot), false).
 
 initially(charging_base_at(room2), true).
 
@@ -80,6 +81,7 @@ causes_true(recharge, charged(robot), true).
 %%%% HIGH-LEVEL CONTROL PROGRAM %%%%
 proc(illegal, [move(room1, room2), move(room2, room5), move(room5, room4), drop_trash(room4) ]).
 proc(legal, [move(room1, room2), move(room2, room5), clean(room5) ]).
+proc(proj_seq, [move(room1, room2), move(room2, room3), move(room3, room6), pickup_trash(room6), move(room6, room3)]).
 
 proc(control(main_c), 
     pi(R, (
