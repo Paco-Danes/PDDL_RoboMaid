@@ -40,6 +40,7 @@ initially(connected(room2, room3), true).
 initially(connected(room3, room2), true).
 
 initially(dirty(room5), true).
+initially(dirty(room2), true).
 
 initially(trash_at(room6), true).
 initially(trash_bin_at(room4), true).
@@ -78,16 +79,36 @@ prim_action(recharge).
 poss(recharge, (at(R), charging_base_at(R), not(charged(robot)))).
 causes_true(recharge, charged(robot), true).
 
+
 %%%% HIGH-LEVEL CONTROL PROGRAM %%%%
 proc(illegal, [move(room1, room2), move(room2, room5), move(room5, room4), drop_trash(room4) ]).
-proc(legal, [move(room1, room2), move(room2, room5), clean(room5) ]).
+proc(legal, [move(room1, room2), move(room2, room5), clean(room5), move(room5, room2), recharge ]).
 proc(proj_seq, [move(room1, room2), move(room2, room3), move(room3, room6), pickup_trash(room6), move(room6, room3)]).
 
-proc(control(main_c), 
-    pi(R, (
-        (clean(R) ; pickup_trash(R) ; drop_trash(R) ; recharge) ;
-        pi(R1, R2, (move(R1, R2), main))
-    ))
+
+% all actions with non-deterministically chosen parameters
+proc(pi_move,
+  pi([r1, r2], move(r1, r2))
 ).
+
+proc(pi_clean,
+  pi(r, clean(r))
+).
+
+proc(pi_pickup_trash,
+  pi(r, pickup_trash(r))
+).
+
+proc(pi_drop_trash,
+  pi(r, drop_trash(r))
+).
+
+proc(pi_recharge,
+    recharge
+).
+
+/* full_search controller: choose non-deterministically random actions 
+   until it finds a solution */
+proc(control(full_search), search( [ star(ndet(pi_move, pi_clean)), ?(neg(dirty(room2)) ) ] )).
 
 exog_occurs(_Action) :- false.
