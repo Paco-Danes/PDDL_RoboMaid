@@ -122,9 +122,7 @@ legality_task :-
 projection_task :-
 	format("Choose condition to satisfy:\n"),
 	read(COND), nl,
-	format("Write sequence of actions:\n"),
-	read(SEQ), nl,
-	indigolog([SEQ, ?(COND)]).
+	indigolog([proj_seq, ?(COND)]).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
